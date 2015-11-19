@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}ORM{% endblock %}
+{% block content %}
+<h3>Категории где есть товар с ценой больше 100 рублей</h3>
+
+{% for item in object_list %}
+<blockquote>
+  <p>{{ item.name }}</p>
+  <footer>Количество товаров в категории - {{ item.count }}</footer>
+</blockquote>
+{% empty %}
+Not found!
+{% endfor %}
+
+<h3>Категории в в которых строго больше 10 товаров и с ценой больше 100 рублей</h3>
+{% for item in object_list %}
+    {% if  item.count > 10 %}
+    <blockquote>
+        <p>{{ item.name }}</p>
+            <footer>Количество товаров в категории - {{ item.count }}</footer>
+    </blockquote>
+    {% endif %}
+{% empty %}
+Not found!
+{% endfor %}
+
+
+
+    <h3>Написать код python, который выводит в консоль перечень всех товаров. Каждая строка должна содержать следующие данные:</h3>
+    <ul>
+        <li>название категории товара</li>
+        <li>наименование товара</li>
+        <li>цена</li>
+    </ul>
+
+  <pre>
+    python manage.py shell
+    import django
+    from product.models import Product
+    products = Product.objects.all()
+    for item in products:
+        print item.category.name
+        print item.name
+        print item.price
+  </pre>
+{% endblock content %}

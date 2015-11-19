@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Git{% endblock %}
+{% block content %}
+<blockquote>
+<p>1) создание и переход на новую ветку feature_1</p>
+  <footer>
+    git branch feature_1<br/>
+    git checkout feature_1
+  </footer>
+</blockquote>
+<blockquote>
+  <p>2) сделать два коммита</p>
+  <footer>
+    git commit -m "first"<br/>
+    git commit -m "second"
+  </footer>
+</blockquote>
+<blockquote>
+  <p>3) удалить второй коммит вместе с изменениями</p>
+  <footer>
+    git reset --hard HEAD^
+  </footer>
+</blockquote>
+<blockquote>
+  <p>4) смержить эту ветку в master</p>
+  <footer>
+    git checkout master<br/>
+    git merge feature_1
+  </footer>
+</blockquote>
+{% endblock content %}

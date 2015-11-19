@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Index{% endblock %}
+{% block content %}
+<div class="starter-template">
+        <h3>Репозиторий</h3>
+    <a href="https://github.com/Antoha87/app" target="_blank">GitHub</a>
+
+    <h3>Админка</h3>
+    <a href="{% url 'admin:index' %}" target="_blank">Admin</a><br/>
+    Login: <em>admin</em><br/>
+    Password: <em>admin</em>
+
+    <h3>Мое резюме</h3>
+
+</div>
+{% endblock content %}

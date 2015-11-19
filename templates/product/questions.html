@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Questions{% endblock %}
+{% block content %}
+<blockquote>
+  <p>
+  1. Suppose we have several independent models which have some fields in common.
+     What type of django model inheritance should be used to avoid typing those common fields definitions in each model?
+</p>
+  <footer>iv. Abstract base classes </footer>
+</blockquote>
+<blockquote>
+  <p>2. Suppose we have model with a custom manager:<br/>
+    What is the correct CustomQuerySet implementation?
+</p>
+  <footer>iii.
+    <pre>
+    class CustomQuerySet(QuerySet):
+        def delete(self):
+        self.active = False
+
+        def delete_real(self):
+            super(CustomQuerySet, self).delete()
+    </pre>
+</footer>
+</blockquote>
+<blockquote>
+  <p>3. What is the correct field definition?
+</p>
+  <footer>i.  birthday = models.DateField(null=True, blank=True)</footer>
+</blockquote>
+{% endblock content %}

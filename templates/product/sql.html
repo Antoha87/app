@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}SQL{% endblock %}
+{% block content %}
+<h3>Kоличество проданных</h3>
+{% for phone, count in buy_list %}
+<blockquote>
+  <p>Номер телефона - {{ phone }}
+</p>
+  <footer>Куплено - {{ count }} </footer>
+</blockquote>
+{% endfor %}
+
+
+<h3>Kоличество  проданных и непроданных</h3>
+{% for phone, count1, count2 in all_count_items %}
+<blockquote>
+  <p>Номер телефона - {{ phone }}
+</p>
+  <footer>
+      Не куплено - {{ count2 }}, Куплено - {{ count1 }}
+  </footer>
+</blockquote>
+{% endfor %}
+
+
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Reg exp{% endblock %}
+{% block content %}
+<blockquote>
+<p>Написать код (с помощью регулярных выражений и без них) для удаления из строки незакрытых скобок вместе с их содержимым,
+если после них нет закрытых блоков: 'asdfd((asdf)(asdf' -> 'asdfd((asdf)'</p>
+</blockquote>
+        <pre>
+class RegExpView(TemplateView):
+    template_name = 'product/reg_exp.html'
+    str = 'asdfd((asdf)(asdf'
+
+    def without_reg(self):
+        i = max([index for index, sym in enumerate(self.str) if sym in ')'])
+        if self.str[i] == '(':
+            return self.str[:i]
+        else:
+            return self.str[:i+1]
+
+    def with_reg(self):
+        reg_str = re.sub('\([^)]+$', '', self.str)
+        return reg_str
+
+    def get_context_data(self, **kwargs):
+        context = super(RegExpView, self).get_context_data(**kwargs)
+        context['without_reg'] = self.without_reg()
+        context['with_reg'] = self.with_reg()
+        return context
+        </pre>
+
+
+
+Результат:<br/>
+С регулярным выражением - <strong> {{ with_reg }}</strong><br/>
+Без регулярного выражения - <strong> {{ without_reg }}</strong>
+
+{% endblock content %}

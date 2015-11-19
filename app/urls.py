@@ -15,7 +15,16 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from product.views import IndexView, RegExpView, OrmView, QuestionsView, SqlView, DiscountView, GitView
+
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', IndexView.as_view(), name='index'),
+    url(r'^reg-exp/', RegExpView.as_view(), name='reg_exp'),
+    url(r'^orm/', OrmView.as_view(), name='orm'),
+    url(r'^questions/', QuestionsView.as_view(), name='questions'),
+    url(r'^sql/', SqlView.as_view(), name='sql'),
+    url(r'^discount/', DiscountView.as_view(), name='discount'),
+    url(r'^git/', GitView.as_view(), name='git'),
 ]
