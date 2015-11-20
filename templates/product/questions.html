@@ -8,25 +8,45 @@
      What type of django model inheritance should be used to avoid typing those common fields definitions in each model?
 </p>
   <footer>iv. Abstract base classes </footer>
+    - Было бы правельнее использовать просто абстрактный класс, базовый абстрактный подрозумивает обязательное переопредиление абстр. методов
+    <pre>
+        class Person(models.Model):
+            name = models.CharField(max_length=30)
+            age = models.IntegerField()
+
+            class Meta:
+                abstract = True
+            # при этом класс Person не будет сохраняться в базе
+
+        class Student(Person):
+            # теперь поля Person будут здесь
+
+        class Teacher(Person):
+            # теперь поля Person будут здесь
+
+    </pre>
 </blockquote>
 <blockquote>
   <p>2. Suppose we have model with a custom manager:<br/>
     What is the correct CustomQuerySet implementation?
 </p>
-  <footer>iii.
+  <footer>ii.
     <pre>
-    class CustomQuerySet(QuerySet):
-        def delete(self):
-        self.active = False
+        class CustomQuerySet(QuerySet):
+            def delete(self):
+                self.update(active=False)
 
-        def delete_real(self):
-            super(CustomQuerySet, self).delete()
+            def delete_real(self):
+                super(CustomQuerySet, self).delete()
+
     </pre>
 </footer>
+        Так как мы работаем с QuerySet мы используем метод update()
 </blockquote>
 <blockquote>
   <p>3. What is the correct field definition?
 </p>
-  <footer>i.  birthday = models.DateField(null=True, blank=True)</footer>
+  <footer>iii. birthday = models.DateField(null=True, blank=False) </footer>
+    При blank=False поле будет обязательным в форме, null=True - позволит создать пустое значение
 </blockquote>
 {% endblock content %}
